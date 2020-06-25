@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+<style rel="stylesheet" src="style.css"></style>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+      width: 60%;
+      height: 100%;
+  }
+  </style>
+
+  <title>{% block title %}Fancy Feasts{% endblock %}</title>
+  <link href="{% static "css/base.css" %}" rel="stylesheet">
+</head>
+<body>
+  <div id="header">
+    <a href="/" class="logo">Fancy Feasts</a>
+  </div>
+  <div id="subheader">
+    <div class="cart">
+      <ul class="nav navbar-nav">
+      <li>
+
+      {% with total_items=cart|length %}
+          {% if cart|length > 0 %}
+            Your cart:
+            <a href="{% url "cart:cart_detail" %}">
+              {{ total_items }} item{{ total_items|pluralize }},
+              ${{ cart.get_total_price }}
+            </a>
+          {% else %}
+            Your cart is empty.
+          {% endif %}
+        {% endwith %}
+    </div>
+  </div>
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>
