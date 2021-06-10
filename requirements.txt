@@ -1,4 +1,4 @@
-django==2.0.5
+django==2.2.24
 Pillow==5.1.0
 braintree==3.45.0
 
